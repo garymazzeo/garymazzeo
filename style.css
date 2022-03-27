@@ -81,7 +81,7 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20em, 1fr));
   /* grid-template-rows: repeat(auto-fit, 8rem); */
-  gap: 12rem 6rem;
+  gap: clamp(3rem, 15vw, 12rem) 6rem;
   padding: 0;
   list-style: none;
 }
