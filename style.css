@@ -16,6 +16,11 @@ body {
   overflow-x: hidden;
 }
 
+h1, h2, nav {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 h1, h2 {
   font-weight: 700;
   margin: 0;
@@ -31,7 +36,8 @@ h2 {
   font-size: clamp(1rem, 12vw, 3rem);
 }
 
-.text--purple-gradient {
+.text--purple-gradient,
+.description a {
   background-image: var(--purple-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -65,6 +71,10 @@ nav .links a + a {
 header {
   margin-top: min(15vh, 8rem);
   margin-bottom: min(20vh, 15rem);
+}
+
+.single header {
+  margin-bottom: 6rem;
 }
 
 .cards {
@@ -149,13 +159,13 @@ header {
 }
 
 .tag.tag--design {
-  --tag-color: hsl(var(--aqua));
-  --tag-bg-color: hsl(var(--aqua) / 20%);
+  --tag-color: hsl(var(--pink));
+  --tag-bg-color: hsl(var(--pink) / 20%);
 }
 
 .tag.tag--prototyping {
-  --tag-color: hsl(var(--pink));
-  --tag-bg-color: hsl(var(--pink) / 20%);
+  --tag-color: hsl(var(--aqua));
+  --tag-bg-color: hsl(var(--aqua) / 20%);
 }
 
 .tag {
@@ -168,12 +178,15 @@ header {
   font-size: 0.75rem;
 }
 
-.single img {
+.single img,
+.single video {
   border-radius: 0.5rem;
 }
 
 .single .main-image {
   position: relative;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .single .main-image::before {
@@ -227,6 +240,18 @@ header {
   height: var(--burst-size);
   width: var(--burst-size);
   z-index: -1;
+}
+
+.single .info img + img,
+.single .info video + p,
+.single .info img + p {
+  margin-top: 2rem;
+}
+
+.description a {
+  font-weight: 700;
+  border-bottom: 1px solid hsl(0 100% 100%);
+  text-decoration: none;
 }
 
 
