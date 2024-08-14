@@ -1,0 +1,36 @@
+---
+import Head from '../components/Head.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+import '../styles/reset.css';
+import '../styles/styles.css';
+
+const { content } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<Head />
+  <body class="project">
+    <Nav title={content.title} />
+
+    <header>
+      <h1>{content.project}</h1>
+    </header>
+
+    <main>
+      <figure class="main-image">
+        <img src="/img/${content.img}" alt="Appel Environmental Design homepage">
+      </figure>
+      <div class="info">
+        <div class="tags">
+        {content.tags.map((t) => <span class="tag tag--${t}">{t}</span>)}
+        </div>
+        <div class="description">
+          <p><slot /></p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
