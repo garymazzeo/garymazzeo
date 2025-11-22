@@ -168,6 +168,16 @@ header {
   --tag-bg-color: hsl(var(--aqua) / 20%);
 }
 
+.tag.tag--branding {
+  --tag-color: hsl(var(--pink));
+  --tag-bg-color: hsl(var(--pink) / 20%);
+}
+
+.tag.tag--print {
+  --tag-color: hsl(var(--pink));
+  --tag-bg-color: hsl(var(--pink) / 20%);
+}
+
 .tag {
   display: inline-block;
   margin-bottom: 1rem;

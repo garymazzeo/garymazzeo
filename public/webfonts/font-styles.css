@@ -1,0 +1,73 @@
+/*
+- - - > |  @font-face  | < - - - 
+*/
+/* Scandia Web Regular */
+	@font-face {
+	font-family: 'ScandiaWeb';
+	src: url('ScandiaWebRegular/ScandiaWebRegular.eot');
+	src: url('ScandiaWebRegular/ScandiaWebRegular.eot?#iefix') format('embedded-opentype'),
+         url('ScandiaWebRegular/ScandiaWebRegular.woff2') format('woff2'),
+         url('ScandiaWebRegular/ScandiaWebRegular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	}
+
+/* Scandia Web Regular Italic */
+	@font-face {
+	font-family: 'ScandiaWeb';
+	src: url('ScandiaWebRegularItalic/ScandiaWebRegularItalic.eot');
+	src: url('ScandiaWebRegularItalic/ScandiaWebRegularItalic.eot?#iefix') format('embedded-opentype'),
+         url('ScandiaWebRegularItalic/ScandiaWebRegularItalic.woff2') format('woff2'),
+         url('ScandiaWebRegularItalic/ScandiaWebRegularItalic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+	}
+
+/* Scandia Web Bold */
+	@font-face {
+	font-family: 'ScandiaWeb';
+	src: url('ScandiaWebBold/ScandiaWebBold.eot');
+	src: url('ScandiaWebBold/ScandiaWebBold.eot?#iefix') format('embedded-opentype'),
+         url('ScandiaWebBold/ScandiaWebBold.woff2') format('woff2'),
+         url('ScandiaWebBold/ScandiaWebBold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	}
+
+/* Scandia Web Bold Italic */
+	@font-face {
+	font-family: 'ScandiaWeb';
+	src: url('ScandiaWebBoldItalic/ScandiaWebBoldItalic.eot');
+	src: url('ScandiaWebBoldItalic/ScandiaWebBoldItalic.eot?#iefix') format('embedded-opentype'),
+         url('ScandiaWebBoldItalic/ScandiaWebBoldItalic.woff2') format('woff2'),
+         url('ScandiaWebBoldItalic/ScandiaWebBoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+	}
+
+/*
+- - - > |  Font Classes  | < - - - 
+*/
+.ScandiaWebRegular {
+	font-family: 'ScandiaWeb';
+	font-weight: 400;
+	font-style: normal;
+	}
+
+.ScandiaWebRegularItalic {
+	font-family: 'ScandiaWeb';
+	font-weight: 400;
+	font-style: italic;
+	}
+
+.ScandiaWebBold {
+	font-family: 'ScandiaWeb';
+	font-weight: 700;
+	font-style: normal;
+	}
+
+.ScandiaWebBoldItalic {
+	font-family: 'ScandiaWeb';
+	font-weight: 700;
+	font-style: italic;
+	}

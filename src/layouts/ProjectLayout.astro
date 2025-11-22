@@ -1,34 +1,74 @@
 ---
-import Head from '../components/Head.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import Head from "../components/Head.astro"
+import Nav from "../components/Nav.astro"
+import Footer from "../components/Footer.astro"
+import { Image } from "astro:assets"
+import type { ImageMetadata } from "astro"
 
-import '../styles/reset.css';
-import '../styles/styles.css';
+import "../styles/reset.css"
+import "../styles/styles.css"
 
-const { content } = Astro.props
+// MDX frontmatter is available as props
+const { project, img, imgAlt, tags, title } = Astro.props
+
+// Map tag names to CSS classes
+const tagClassMap: Record<string, string> = {
+  design: "design",
+  coding: "coding",
+  prototyping: "prototyping",
+  branding: "branding",
+  print: "print",
+}
+
+// Get the main image asset
+const isVideo = img?.endsWith(".mp4") ?? false
+let mainImage: ImageMetadata | undefined
+if (img && !isVideo) {
+  try {
+    const imagePath = `../assets/${img}`
+    const imageModule = await import(imagePath)
+    mainImage = imageModule.default
+  } catch (e) {
+    // Image not found, will fall back to regular img tag
+    mainImage = undefined
+  }
+}
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<Head />
-  <body class="project">
-    <Nav title={content.title} />
+  <Head title={title} />
+  <body class="single">
+    <Nav />
 
     <header>
-      <h1>{content.project}</h1>
+      <h1>{project}</h1>
     </header>
 
     <main>
       <figure class="main-image">
-        <img src="/img/${content.img}" alt="Appel Environmental Design homepage">
+        {
+          img && isVideo ? (
+            <video controls width="766">
+              <source src={`/videos/${img}`} type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </video>
+          ) : mainImage ? (
+            <Image src={mainImage} alt={imgAlt || project} />
+          ) : null
+        }
       </figure>
       <div class="info">
         <div class="tags">
-          {content.tags.map((t) => <span class=`tag tag--${t}`>{t}</span>)}
+          {
+            tags?.map((tag) => {
+              const tagClass = tagClassMap[tag] || "design"
+              return <span class={`tag tag--${tagClass}`}>{tag}</span>
+            }) ?? []
+          }
         </div>
         <div class="description">
-          <p><slot /></p>
+          <slot />
         </div>
       </div>
     </main>
