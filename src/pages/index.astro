@@ -12,7 +12,7 @@ import { getCollection } from "astro:content";
 const projects = await getCollection("projects");
 
 // Import all images using glob
-const images = await import.meta.glob<{ default: ImageMetadata }>(
+const images = import.meta.glob<{ default: ImageMetadata }>(
     "../assets/*.{png,jpg,jpeg}",
     { eager: true },
 );
