@@ -1,88 +1,100 @@
 ---
-import Head from "../components/Head.astro"
-import Nav from "../components/Nav.astro"
-import Footer from "../components/Footer.astro"
-import type { ImageMetadata } from "astro"
-import { Image } from "astro:assets"
+import Head from "../components/Head.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 
-import "../styles/reset.css"
-import "../styles/styles.css"
+import "../styles/reset.css";
+import "../styles/styles.css";
 
-import { getCollection } from "astro:content"
-const projects = await getCollection("projects")
+import { getCollection } from "astro:content";
+const projects = await getCollection("projects");
 
 // Import all images using glob
 const images = await import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/*.{png,jpg,jpeg}",
-  { eager: true }
-)
+    "../assets/*.{png,jpg,jpeg}",
+    { eager: true },
+);
 
 // Helper function to get image
 function getImage(imgPath: string): ImageMetadata | null {
-  const imageModule = images[`../assets/${imgPath}`]
-  return imageModule?.default || null
+    const imageModule = images[`../assets/${imgPath}`];
+    return imageModule?.default || null;
 }
 
 // Helper function to get tag class name
 function getTagClass(tag: string): string {
-  const tagMap: Record<string, string> = {
-    design: "design",
-    coding: "coding",
-    prototyping: "prototyping",
-    branding: "branding",
-    print: "print",
-  }
-  return tagMap[tag] || "design"
+    const tagMap: Record<string, string> = {
+        design: "design",
+        coding: "coding",
+        prototyping: "prototyping",
+        branding: "branding",
+        print: "print",
+    };
+    return tagMap[tag] || "design";
 }
 ---
 
 <!doctype html>
 <html lang="en">
-  <Head />
-  <body class="home">
-    <Nav />
-    <header>
-      <h1>Hi, I&rsquo;m Gary.</h1>
-      <h2 class="text--purple-gradient">UI/UX Designer &amp; Developer.</h2>
-    </header>
+    <Head />
+    <body class="home">
+        <Nav />
+        <header>
+            <h1>Hi, I&rsquo;m Gary.</h1>
+            <h2 class="text--purple-gradient">
+                UI/UX Designer &amp; Developer.
+            </h2>
+        </header>
 
-    <main>
-      <ul class="cards">
-        {
-          projects.map((project) => {
-            const projectImage = getImage(project.data.img)
-            const isVideo = project.data.img.endsWith(".mp4")
+        <main>
+            <ul class="cards">
+                {projects.map((project) => {
+                    const projectImage = getImage(project.data.img);
+                    const isVideo = project.data.img.endsWith(".mp4");
 
-            return (
-              <li class="card">
-                {isVideo ? (
-                  <video
-                    src={`/videos/${project.data.img}`}
-                    class="card__image"
-                    muted
-                    playsinline
-                  />
-                ) : projectImage ? (
-                  <Image
-                    src={projectImage}
-                    alt={project.data.imgAlt || project.data.project}
-                    class="card__image"
-                  />
-                ) : null}
-                <a href={`/projects/${project.slug}`} class="card__link">
-                  <span class="card__title">{project.data.project}</span>
-                </a>
-                <div class="tags">
-                  {project.data.tags.map((tag) => (
-                    <span class={`tag tag--${getTagClass(tag)}`}>{tag}</span>
-                  ))}
-                </div>
-              </li>
-            )
-          })
-        }
-      </ul>
-    </main>
-    <Footer />
-  </body>
+                    return (
+                        <li class="card">
+                            {isVideo ? (
+                                <video
+                                    src={`/videos/${project.data.img}`}
+                                    class="card__image"
+                                    muted
+                                    playsinline
+                                />
+                            ) : projectImage ? (
+                                <Image
+                                    src={projectImage}
+                                    alt={
+                                        project.data.imgAlt ||
+                                        project.data.project
+                                    }
+                                    class="card__image"
+                                />
+                            ) : null}
+                            <a
+                                href={`/projects/${project.id}`}
+                                class="card__link"
+                            >
+                                <span class="card__title">
+                                    {project.data.project}
+                                </span>
+                            </a>
+                            <div class="tags">
+                                {project.data.tags.map((tag) => (
+                                    <span
+                                        class={`tag tag--${getTagClass(tag)}`}
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </li>
+                    );
+                })}
+            </ul>
+        </main>
+        <Footer />
+    </body>
 </html>
